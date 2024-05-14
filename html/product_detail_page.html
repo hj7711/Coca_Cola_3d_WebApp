@@ -27,19 +27,15 @@
     <!-- Main Content Section -->
     <main class="main">
         <div class="container">
-            <h1>Product Page</h1>
-
-            <!-- <x3d width='500px' height='400px'> 
-                <scene>
-                <Transform  scale="0.005 0.005 0.005">
-                <inline url="../models/drpepper_can.x3d"> </inline>
-                </Transform> 
-                </scene> 
-            </x3d>  -->
+            <div id="product-details">
+                <h1 id="product-name">Product Name</h1>
+                <p id="model-name">Model Name</p>
+                <p id="tagline">Tagline</p>
+            </div>
 
             <x3d width='500px' height='400px'> 
                 <scene>
-                <inline url="../models/sprite_bottle.x3d"> </inline> 
+                    <inline url="../models/sprite_bottle.x3d"> </inline> 
                 </scene> 
             </x3d>
         </div>
@@ -51,5 +47,48 @@
             <p>&copy; 2024 Coca-Cola Company. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        // Retrieve query parameters from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productName = urlParams.get('name');
+        const modelName = urlParams.get('model');
+        const tagline = urlParams.get('tagline');
+
+        // Display product details
+        document.getElementById('product-name').textContent = productName;
+        document.getElementById('model-name').textContent = modelName;
+        document.getElementById('tagline').textContent = tagline;
+
+
+        function loadX3DModel() {
+        const x3dContainer = document.querySelector('x3d scene');
+        switch (modelName) {
+            case 'coke_can.x3d':
+            x3dContainer.innerHTML = 
+                    `<Transform scale="1.2 1.2 1.2" translation="0 -2 0">
+                        <inline url="../models/${modelName}"></inline>
+                    </Transform>`;
+                break;
+            case 'drpepper_can.x3d':
+            x3dContainer.innerHTML = 
+                    `<Transform scale="0.01 0.01 0.01" translation="0 -3 0">
+                        <inline url="../models/${modelName}"></inline>
+                    </Transform>`;
+                break;
+            case 'sprite_bottle.x3d':
+            x3dContainer.innerHTML = 
+                    `<Transform scale="0.5 0.5 0.5" translation="0 -3 0">
+                        <inline url="../models/${modelName}"></inline>
+                    </Transform>`;
+                break;
+            default:
+            x3dContainer.innerHTML = `<inline url="../models/coke_can.x3d"></inline>`;
+        }
+    }
+
+    // Load the appropriate X3D model based on model type
+    loadX3DModel();
+    </script>
 </body>
 </html>

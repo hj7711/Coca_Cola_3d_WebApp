@@ -70,27 +70,31 @@
         // Attach click event listener to grid cells
         document.querySelectorAll('.product-cell').forEach(cell => {
             cell.addEventListener('click', function() {
-                let productname = this.getAttribute('itemid'); 
+                let productName = this.getAttribute('itemid'); 
     
                 // Fetch product data for the clicked product ID
-                fetchProductData(productname);
+                fetchProductData(productName);
             });
         });
     
         // Function to fetch product data using AJAX
-        function fetchProductData(productname) {
-            // AJAX request to fetch product data
-            // fetch('fetch_product_data.php?id=' + productId)
-            //     .then(response => response.json())
-            //     .then(data => {
-            //         // Redirect to product detail page with product data
-            //         window.location.href = 'product_detail_page.php?id=' + productId;
-            //     })
-            //     .catch(error => console.error('Error fetching product data:', error));
-
-            console.log(productname);
+        function fetchProductData(productName) {
+            fetch('../php/fetch_product_details.php?name=' + encodeURIComponent(productName))
+                .then(response => response.json())
+                .then(product => {
+                    // Log the received product details
+                    console.log(productName);
+                    // After fetching product details successfully
+                    let productUrl = `product_detail_page.html?name=${encodeURIComponent(product.name)}&model=${encodeURIComponent(product.model_name)}&tagline=${encodeURIComponent(product.tagline)}`;
+                    window.location.href = productUrl;
+                })
+                .catch(error => console.error('Error fetching product details:', error));
         }
     </script>
+    
+
+
+</script>
 
     <!-- Footer Section -->
     <footer class="footer">
