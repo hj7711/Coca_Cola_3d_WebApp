@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coca-Cola Web App</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        /* Add your responsive styles here */
+        @media (max-width: 768px) {
+            .product-grid-container {
+                max-width: 90%; /* Adjust the width for smaller screens */
+                padding: 0 10px; /* Adjust the padding for smaller screens */
+            }
+            .product-grid {
+                grid-gap: 20px; /* Adjust the gap between grid items */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>My Coca-Cola Brand</h1>
+                <p class="strapline">Delicious and Refreshing</p>
+            </div>
+            <ul class="navigation">
+                <li class="nav-right"><a href="#">About</a></li>
+                <li class="nav-right"><a href="#">Contact</a></li>
+                <li class="nav-right"><a href="#">Home</a></li>               
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="main">
+        <div class="container">
+            <h1>Our Products</h1>
+            <div class="product-grid-container">
+                <div class="product-grid">
+                    
+                    <div class="product-cell" itemid="Coca-Cola">
+                        <a href="#">Product 1</a>
+                    </div>
+                    <div class="product-cell" itemid="Dr.Pepper">
+                        <a href="#">Product 2</a>
+                    </div>
+                    <div class="product-cell" itemid="Sprite">
+                        <a href="#">Product 3</a>
+                    </div>
+                    <div class="product-cell" itemid="Sprite">
+                        <a href="#">Product X</a>
+                    </div>
+
+                    <div class="product-cell" itemid="Sprite">
+                        <a href="#">Product X</a>
+                    </div>
+                    <div class="product-cell" itemid="Sprite">
+                        <a href="#">Product X</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <script>
+        // Attach click event listener to grid cells
+        document.querySelectorAll('.product-cell').forEach(cell => {
+            cell.addEventListener('click', function() {
+                let productname = this.getAttribute('itemid'); 
+    
+                // Fetch product data for the clicked product ID
+                fetchProductData(productname);
+            });
+        });
+    
+        // Function to fetch product data using AJAX
+        function fetchProductData(productname) {
+            // AJAX request to fetch product data
+            // fetch('fetch_product_data.php?id=' + productId)
+            //     .then(response => response.json())
+            //     .then(data => {
+            //         // Redirect to product detail page with product data
+            //         window.location.href = 'product_detail_page.php?id=' + productId;
+            //     })
+            //     .catch(error => console.error('Error fetching product data:', error));
+
+            console.log(productname);
+        }
+    </script>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Coca-Cola Company. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

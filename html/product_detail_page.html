@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="text/javascript" src="https://www.x3dom.org/download/x3dom.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://www.x3dom.org/download/x3dom.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>My Coca-Cola Brand</h1>
+                <p class="strapline">Delicious and Refreshing</p>
+            </div>
+            <ul class="navigation">
+                <li class="nav-right"><a href="#">About</a></li>
+                <li class="nav-right"><a href="#">Contact</a></li>
+                <li class="nav-right"><a href="#">Home</a></li>               
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="main">
+        <div class="container">
+            <h1>Product Page</h1>
+
+            <!-- <x3d width='500px' height='400px'> 
+                <scene>
+                <Transform  scale="0.005 0.005 0.005">
+                <inline url="../models/drpepper_can.x3d"> </inline>
+                </Transform> 
+                </scene> 
+            </x3d>  -->
+
+            <x3d width='500px' height='400px'> 
+                <scene>
+                <inline url="../models/sprite_bottle.x3d"> </inline> 
+                </scene> 
+            </x3d>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Coca-Cola Company. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
