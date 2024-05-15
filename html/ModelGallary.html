@@ -19,7 +19,7 @@
             <ul class="navigation">
                 <li class="nav-right"><a href="About.html">About</a></li>
                 <li class="nav-right"><a href="ModelGallary.html">All Models</a></li>
-                <li class="nav-right"><a href="index.html">Home</a></li>                
+                <li class="nav-right"><a href="index.html">Home</a></li>               
             </ul>
         </div>
     </header>
@@ -27,10 +27,15 @@
     <!-- Main Content Section -->
     <main class="main">
         <div class="container">
-            <div id="product-details">
-                <h1 id="product-name">Product Name</h1>
-                <p id="model-name">Model Name</p>
-                <p id="tagline">Tagline</p>
+            <div >
+                <h1 >Model Gallary</h1>
+                
+                <div class="frame">
+                    <h2>Models</h2>
+                    <button onclick="loadX3DModel('Coca-Cola')">Coca Cola</button>
+                    <button onclick="loadX3DModel('Dr.Pepper')">Dr.Pepper</button>
+                    <button onclick="loadX3DModel('Sprite')">Sprite</button>
+                </div>
             </div>
             
             <div class="x3d-container">
@@ -66,6 +71,11 @@
                 <button onclick="disable_light()">Switch Off Light</button>
             </div>
 
+            <div>
+                <h1 id="product-name">ProductName</h1>
+                <p id="product-tagline">ProductTagline</p>
+            </div>
+
 
 
         </div>
@@ -79,26 +89,28 @@
     </footer>
 
     <script>
-        // Retrieve query parameters from URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const productName = urlParams.get('name');
-        const modelName = urlParams.get('model');
-        const tagline = urlParams.get('tagline');
-
-        // Display product details
-        document.getElementById('product-name').textContent = productName;
-        document.getElementById('model-name').textContent = modelName;
-        document.getElementById('tagline').textContent = tagline;
-
         
-        function loadX3DModel() {
+
+        function fetchProductData(productName) {
+            fetch('../php/fetch_product_details.php?name=' + encodeURIComponent(productName))
+                .then(response => response.json())
+                .then(product => {
+
+                    document.getElementById('product-name').textContent = product.name;
+                    document.getElementById('product-tagline').textContent = product.tagline;
+
+                })
+                .catch(error => console.error('Error fetching product details:', error));
+        }
+
+        function loadX3DModel(name) {
         const x3dContainer = document.querySelector('x3d scene');
-        switch (modelName) {
-            case 'coke_can.x3d':
+        switch (name) {//
+            case 'Coca-Cola':
             x3dContainer.innerHTML = 
                     `<DirectionalLight id="directional" direction='0 0 1' on ="TRUE" intensity='1.0' shadowIntensity='0.0'> </DirectionalLight> 
                     <Transform DEF= 'model' scale="1.2 1.2 1.2" translation="0 -2 0">
-                        <inline url="../models/${modelName}"></inline>
+                        <inline url="../models/coke_can.x3d"></inline>
                     </Transform>
                     <timeSensor id="timer" DEF='clock' cycleInterval='8' loop='false'></timeSensor>
                     <orientationInterpolator DEF='spinThings' key='0 0.25 0.5 0.75 1' keyValue='0 1 0 0  0 1 0 1.57079  0 1 0 3.14159  0 1 0 4.71239  0 1 0 6.28317'></orientationInterpolator>
@@ -106,11 +118,11 @@
                     <ROUTE fromNode='clock' fromField='fraction_changed' toNode='spinThings' toField='set_fraction'></ROUTE>
                     <ROUTE fromNode='spinThings' fromField='value_changed' toNode='model' toField='set_rotation'></ROUTE>`;
                 break;
-            case 'drpepper_can.x3d':
+            case 'Dr.Pepper':
             x3dContainer.innerHTML = 
                     `<DirectionalLight id="directional" direction='0 0 1' on ="TRUE" intensity='1.0' shadowIntensity='0.0'> </DirectionalLight>
                     <Transform DEF= 'model' scale="0.01 0.01 0.01" translation="0 -3 0">
-                        <inline url="../models/${modelName}"></inline>
+                        <inline url="../models/drpepper_can.x3d"></inline>
                     </Transform>
                     <timeSensor id="timer" DEF='clock' cycleInterval='8' loop='false'></timeSensor>
                     <orientationInterpolator DEF='spinThings' key='0 0.25 0.5 0.75 1' keyValue='0 1 0 0  0 1 0 1.57079  0 1 0 3.14159  0 1 0 4.71239  0 1 0 6.28317'></orientationInterpolator>
@@ -118,11 +130,11 @@
                     <ROUTE fromNode='clock' fromField='fraction_changed' toNode='spinThings' toField='set_fraction'></ROUTE>
                     <ROUTE fromNode='spinThings' fromField='value_changed' toNode='model' toField='set_rotation'></ROUTE>`;
                 break;
-            case 'sprite_bottle.x3d':
+            case 'Sprite':
             x3dContainer.innerHTML = 
                     `<DirectionalLight id="directional" direction='0 0 1' on ="TRUE" intensity='1.0' shadowIntensity='0.0'> </DirectionalLight>
                     <Transform DEF= 'model' scale="0.5 0.5 0.5" translation="0 -3 0">
-                        <inline url="../models/${modelName}"></inline>
+                        <inline url="../models/sprite_bottle.x3d"></inline>
                     </Transform>
                     <timeSensor id="timer" DEF='clock' cycleInterval='8' loop='false'></timeSensor>
                     <orientationInterpolator DEF='spinThings' key='0 0.25 0.5 0.75 1' keyValue='0 1 0 0  0 1 0 1.57079  0 1 0 3.14159  0 1 0 4.71239  0 1 0 6.28317'></orientationInterpolator>
@@ -134,7 +146,7 @@
             x3dContainer.innerHTML = 
                     `<DirectionalLight id="directional" direction='0 0 1' on ="TRUE" intensity='1.0' shadowIntensity='0.0'> </DirectionalLight>
                     <Transform DEF= 'model' scale="0.01 0.01 0.01" translation="0 -3 0">
-                        <inline url="../models/${modelName}"></inline>
+                        <inline url="../models/drpepper_can.x3d"></inline>
                     </Transform>
                     <timeSensor id="timer" DEF='clock' cycleInterval='8' loop='false'></timeSensor>
                     <orientationInterpolator DEF='spinThings' key='0 0.25 0.5 0.75 1' keyValue='0 1 0 0  0 1 0 1.57079  0 1 0 3.14159  0 1 0 4.71239  0 1 0 6.28317'></orientationInterpolator>
@@ -143,6 +155,7 @@
                     <ROUTE fromNode='spinThings' fromField='value_changed' toNode='model' toField='set_rotation'></ROUTE>`;
                 
         }
+        fetchProductData(name); 
     }
     
 
@@ -214,7 +227,7 @@ function disable_light()
 
 
     // Load the appropriate X3D model based on model type
-    loadX3DModel();
+    loadX3DModel("Coca-Cola");
     setCamera('far');
     </script>
 </body>
